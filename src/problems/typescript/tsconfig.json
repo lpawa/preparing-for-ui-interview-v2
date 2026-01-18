@@ -1,0 +1,16 @@
+{
+  "extends": "../../../tsconfig.json",
+  "compilerOptions": {
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "baseUrl": ".",
+    "paths": {
+      "@course/types": ["./types.ts"]
+    }
+  },
+  "include": [
+    ".",
+    "types.ts"
+  ],
+  "exclude": []
+}

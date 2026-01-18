@@ -7,6 +7,9 @@
       ],
       "@course/cx": [
         "src/utilities/utility.ts"
+      ],
+      "@course/types": [
+        "src/problems/typescript/types.ts"
       ]
     },
     "target": "ESNext",
@@ -38,5 +41,8 @@
   },
   "include": [
     "src"
+  ],
+  "exclude": [
+    "src/problems/typescript"
   ]
 }
