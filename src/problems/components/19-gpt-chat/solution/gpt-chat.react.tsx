@@ -29,41 +29,41 @@ export function useMarkdownStream(options: StreamOptions = {}) {
     const controller = new AbortController()
     controllerRef.current = controller
     setInProgress(true)
-    ;(async () => {
-      try {
-        const response = await fetch(`http://localhost:3000/api/stream-markdown?delay=${delay}`, {
-          signal: controller.signal,
-        })
+      ; (async () => {
+        try {
+          const response = await fetch(`http://localhost:3000/api/stream-markdown?delay=${delay}`, {
+            signal: controller.signal,
+          })
 
-        if (!response.ok) {
-          throw new Error(`Failed to fetch: ${response.status}`)
+          if (!response.ok) {
+            throw new Error(`Failed to fetch: ${response.status}`)
+          }
+
+          const reader = response.body?.getReader()
+          if (!reader) {
+            throw new Error('No readable stream available')
+          }
+
+          const decoder = new TextDecoder()
+
+          while (true) {
+            const { done, value } = await reader.read()
+            if (done) break
+            const text = decoder.decode(value, { stream: true })
+            onChunk(text)
+          }
+
+          onComplete?.()
+        } catch (error) {
+          if ((error as Error).name !== 'AbortError') {
+            console.error('Stream error:', error)
+            onError?.(error as Error)
+          }
+        } finally {
+          controllerRef.current = null
+          setInProgress(false)
         }
-
-        const reader = response.body?.getReader()
-        if (!reader) {
-          throw new Error('No readable stream available')
-        }
-
-        const decoder = new TextDecoder()
-
-        while (true) {
-          const { done, value } = await reader.read()
-          if (done) break
-          const text = decoder.decode(value, { stream: true })
-          onChunk(text)
-        }
-
-        onComplete?.()
-      } catch (error) {
-        if ((error as Error).name !== 'AbortError') {
-          console.error('Stream error:', error)
-          onError?.(error as Error)
-        }
-      } finally {
-        controllerRef.current = null
-        setInProgress(false)
-      }
-    })()
+      })()
   }
 
   const abort = () => {
@@ -121,12 +121,12 @@ export const GPTComponent = () => {
   }, [chunks, isTyping, type])
 
   return (
-    <div className={css.container}>
+    <div className={cx(css.container, flex.w100)}>
       <section className={css.content} ref={contentRef}>
         <Markdown text={content} />
       </section>
       <section className={cx(flex.flexRowCenter, flex.flexGap32)}>
-        <textarea className={css.textarea}></textarea>
+        <textarea className={cx(css.textarea, flex.w100)}></textarea>
         {inProgress ? (
           <button className={css.button} onClick={abort}>
             Stop

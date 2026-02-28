@@ -24,10 +24,10 @@ export class GPTChat extends AbstractComponent<TGPTChatProps> {
 
   toHTML(): string {
     return `
-            <div class="${css.container}">
+            <div class="${cx(flex.w100, css.container)}">
                 <section class="${css.content}"></section>
                 <section class="${cx(flex.flexRowCenter, flex.flexGap32)}">
-                    <textarea class="${css.textarea}"></textarea>
+                    <textarea class="${cx(flex.w100, css.textarea)}"></textarea>
                     <button class="${css.button}">${this.inProgress ? 'Stop' : 'Send'}</button>
                 </section>
             </div>
