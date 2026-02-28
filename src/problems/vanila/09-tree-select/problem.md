@@ -68,3 +68,9 @@ Clicking 'c' selects it, which makes 'b' partial (one child selected), which mak
 - Use `yield*` to recursively yield nodes for iteration
 - `bubble(node)`: Yields ancestors from immediate parent to root
 - `propagate(node)`: Yields all descendants depth-first
+
+## Run Tests
+
+```bash
+bun test src/problems/vanila/09-tree-select/test/tree-select.test.ts
+```
