@@ -26,7 +26,7 @@ export const StarRatingComponent = ({ readonly, value, onChange }: TStarRatingPr
 
   return (
     <div
-      className={css.container}
+      className={cx(css.container, flex.wh100)}
       onClick={handleStarClick}
       role="radiogroup"
       aria-label="Star Rating"
