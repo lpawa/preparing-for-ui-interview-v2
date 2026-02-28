@@ -15,14 +15,14 @@ export class Dialog extends AbstractComponent<TDialogProps> {
   constructor(config: TComponentConfig<TDialogProps>) {
     super({
       ...config,
-      listeners: ['click'],
+      listeners: ['click', 'close'],
     })
   }
 
   toHTML(): string {
     const { content } = this.config
     return `
-      <dialog class="${cx(styles.padding24, css.container)}">
+      <dialog class="${cx(styles.padding24, styles.bNone, styles.br8, css.container)}">
         <section class="${styles.paddingVer8}">
           ${content}
         </section>
@@ -36,8 +36,11 @@ export class Dialog extends AbstractComponent<TDialogProps> {
 
   afterRender(): void {
     this.#dialogElement = this.container!.querySelector('dialog')
-    // Sync state when dialog is closed natively (e.g., Escape key)
-    this.#dialogElement?.addEventListener('close', () => this.config.onCancel())
+  }
+
+  // Sync state when dialog is closed natively (e.g., Escape key)
+  onClose(): void {
+    this.config.onCancel()
   }
 
   onClick(event: MouseEvent): void {
