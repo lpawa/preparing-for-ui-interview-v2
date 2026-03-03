@@ -188,3 +188,58 @@ export function toRpn(tokens: Token[]): { ok: true; rpn: Token[] } | { ok: false
 
   return { ok: true, rpn: out }
 }
+
+export function evalRpn(
+  rpn: Token[],
+  resolveId: (id: CellId) => { ok: true; n: number } | { ok: false; err: string },
+): string {
+  const stack: number[] = []
+
+  for (const tok of rpn) {
+    if (tok.t === 'num') {
+      stack.push(tok.v)
+      continue
+    }
+
+    if (tok.t === 'ref') {
+      const parsed = resolveId(tok.id)
+      if (!parsed.ok) return parsed.err
+      stack.push(parsed.n)
+      continue
+    }
+
+    if (tok.t === 'op') {
+      if (tok.op === 'NEG') {
+        if (stack.length < 1) return ERROR
+        stack.push(-stack.pop()!)
+        continue
+      }
+
+      if (stack.length < 2) return ERROR
+      const b = stack.pop()!
+      const a = stack.pop()!
+
+      switch (tok.op) {
+        case '+':
+          stack.push(a + b)
+          break
+        case '-':
+          stack.push(a - b)
+          break
+        case '*':
+          stack.push(a * b)
+          break
+        case '/':
+          if (b === 0) return DIV0
+          stack.push(a / b)
+          break
+        default:
+          return ERROR
+      }
+    }
+  }
+
+  if (stack.length !== 1) return ERROR
+  const result = Object.is(stack[0], -0) ? 0 : stack[0]
+  return String(result)
+}

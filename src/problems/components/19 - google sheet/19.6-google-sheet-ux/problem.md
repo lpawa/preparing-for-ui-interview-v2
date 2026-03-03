@@ -9,21 +9,7 @@ Take your logic engine and turn it into a high-performance spreadsheet UI. The c
 ## Background: Advanced UI Techniques
 
 ### 1. Fixed-Row Virtualization
-
-Do not render 2,500 individual React components for your grid! This will cause significant memory overhead and lag.
-
-```text
-  SCROLLABLE VIEWPORT      VIRTUAL CONTENT (e.g. 5000px)
- ┌───────────────────┐    ┌─────────────────────────┐
- │ [Visible Rows]    │    │ [Hidden Rows Above]     │
- │ row 10 to 25      │    ├─────────────────────────┤
- │                   │    │  [ RENDERED ROWS ]      │
- │                   │    ├─────────────────────────┤
- └───────────────────┘    │ [Hidden Rows Below]     │
-                          └─────────────────────────┘
-```
-
-Instead:
+Do not render 2,500 individual React components for your grid! This will cause significant memory overhead and lag. Instead:
 -   Determine the total height of the grid (e.g., 100 rows * 30px = 3000px).
 -   Use a large container with that height and `overflow: auto`.
 -   Calculate which rows are currently visible based on the scroll position.
