@@ -1,3 +1,5 @@
+// bun test src/problems/01-detect-type/test/detect-type.test.ts
+
 // TODO: Implement detectType
 
 export type TType =

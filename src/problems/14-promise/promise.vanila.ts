@@ -1,4 +1,4 @@
-// TODO: Implement promise
+// bun test src/problems/14-promise/test/promise.test.ts
 
 export class MyPromise {
   then() {
