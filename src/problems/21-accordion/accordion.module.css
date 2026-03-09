@@ -1,15 +1,36 @@
 /* Student solution styles */
+
+/* Summary: style the clickable header
+   - set background color (#f9f9f9)
+   - set cursor to pointer
+   - set font-weight to 500
+   - hide default marker with list-style: none */
 .summary {}
+
+/* Hide the default disclosure triangle in WebKit browsers */
 .summary::-webkit-details-marker {}
 
+/* Details: style the accordion item wrapper
+   - add a 1px solid border (#ddd)
+   - add border-radius (4px)
+   - hide overflow */
 .details {}
 
+/* Animate content expansion using ::details-content pseudo-element
+   - transition max-height (0.3s ease) and content-visibility (0.3s allow-discrete)
+   - set max-height to 0
+   - hide overflow */
 .details::details-content {}
 
+/* When open, expand content
+   - set max-height to 500px */
 .details[open]::details-content {}
 
-/* Custom indicator (plus sign) */
+/* Custom indicator (plus sign)
+   - set content to '+'
+   - add transition on transform (0.2s) */
 .summary::after {}
 
-/* Rotate the indicator when the item is open */
+/* Rotate the indicator when the item is open
+   - rotate 45deg to turn '+' into 'x' */
 .details[open] .summary::after {}

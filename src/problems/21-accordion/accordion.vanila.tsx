@@ -20,15 +20,11 @@ import cx from '@course/cx'
  * 3. Provide toHTML template — map over items, render <details>/<summary>/<p> for each
  * 4. Add CSS — use styles and cx() for className composition
  */
-
-// TODO: define TAccordionItem and TProps types
-
 export class Accordion extends AbstractComponent<{}> {
     constructor(config: TComponentConfig<{}>) {
         super(config)
     }
     toHTML(): string {
-        // TODO: implement
         return ''
     }
 }
