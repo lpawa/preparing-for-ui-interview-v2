@@ -31,6 +31,7 @@ import {
   TooltipExample,
   TooltipVanillaExample,
   TooltipStudentExample,
+  TooltipStudentVanillaExample,
 } from './problems/29-tooltip/tooltip.example'
 import {
   TableExample,
@@ -98,6 +99,7 @@ import {
   DialogExample,
   DialogVanillaExample,
   DialogStudentExample,
+  DialogStudentVanillaExample,
 } from './problems/26-dialog/dialog.example'
 import {
   PortfolioVisualizerExample as PortfolioVisualizerUxExample,
@@ -358,6 +360,7 @@ const SECTIONS = {
           react: { component: TooltipExample },
           vanilla: { component: TooltipVanillaExample },
           studentReact: { component: TooltipStudentExample },
+          studentVanilla: { component: TooltipStudentVanillaExample },
         },
       },
       dialog: {
@@ -369,6 +372,7 @@ const SECTIONS = {
           react: { component: DialogExample },
           vanilla: { component: DialogVanillaExample },
           studentReact: { component: DialogStudentExample },
+          studentVanilla: { component: DialogStudentVanillaExample },
         },
       },
       table: {

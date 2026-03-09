@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react'
 import { Dialog as DialogStudent } from './dialog.react'
 import { Dialog } from './solution/dialog.react'
 import { Dialog as VanillaDialog } from './solution/dialog.vanila'
+import { Dialog as VanillaDialogStudent } from './dialog.vanila'
 
 export function DialogExample() {
   const [open, setOpen] = useState(false)
@@ -54,5 +55,49 @@ export function DialogVanillaExample() {
   )
 }
 export const DialogStudentExample = () => {
-  return <DialogStudent />
+  const [open, setOpen] = useState(false)
+
+  return (
+    <div>
+      <button onClick={() => setOpen(true)}>Open Dialog</button>
+      <DialogStudent open={open} onConfirm={() => setOpen(false)} onCancel={() => setOpen(false)}>
+        <h2>Confirm Action</h2>
+        <p>Are you sure you want to proceed?</p>
+      </DialogStudent>
+    </div>
+  )
+}
+
+export function DialogStudentVanillaExample() {
+  const rootRef = useRef<HTMLDivElement>(null)
+  const dialogRef = useRef<VanillaDialogStudent | null>(null)
+
+  useEffect(() => {
+    if (!rootRef.current) return
+    dialogRef.current = new VanillaDialogStudent({
+      root: rootRef.current,
+      content: `
+        <h2>Confirm Action</h2>
+        <p>Are you sure you want to proceed?</p>
+      `,
+      onConfirm: () => console.log('Confirmed'),
+      onCancel: () => console.log('Cancelled'),
+    })
+    dialogRef.current.render()
+    return () => {
+      dialogRef.current?.destroy()
+      dialogRef.current = null
+    }
+  }, [])
+
+  const handleOpen = () => {
+    dialogRef.current?.open()
+  }
+
+  return (
+    <div>
+      <button onClick={handleOpen}>Open Dialog</button>
+      <div ref={rootRef}></div>
+    </div>
+  )
 }

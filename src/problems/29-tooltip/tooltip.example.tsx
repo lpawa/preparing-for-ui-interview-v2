@@ -1,6 +1,7 @@
 import { Tooltip } from './solution/tooltip.react'
 import { Tooltip as TooltipStudent } from './tooltip.react'
 import { Tooltip as VanillaTooltip } from './solution/tooltip.vanila'
+import { Tooltip as VanillaTooltipStudent } from './tooltip.vanila'
 import { useEffect, useRef } from 'react'
 import flex from '@course/styles'
 import cx from '@course/cx'
@@ -186,4 +187,43 @@ export function TooltipVanillaExample() {
 }
 export const TooltipStudentExample = () => {
   return <TooltipStudent />
+}
+
+export function TooltipStudentVanillaExample() {
+  const fixedRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (!fixedRef.current) return
+
+    const createTooltip = (
+      root: HTMLElement,
+      text: string,
+      position: 'top' | 'bottom' | 'left' | 'right' | 'auto',
+      btnText: string,
+    ) => {
+      const btn = document.createElement('button')
+      btn.textContent = btnText
+      const tooltip = new VanillaTooltipStudent({ root, children: btn, content: text, position })
+      tooltip.render()
+      return tooltip
+    }
+
+    const tooltips = [
+      createTooltip(fixedRef.current, 'I appear above the button', 'top', '⬆️ Top'),
+      createTooltip(fixedRef.current, 'I appear below the button', 'bottom', '⬇️ Bottom'),
+      createTooltip(fixedRef.current, 'I appear to the left', 'left', '⬅️ Left'),
+      createTooltip(fixedRef.current, 'I appear to the right', 'right', '➡️ Right'),
+    ]
+
+    return () => {
+      tooltips.forEach((t) => t?.destroy())
+    }
+  }, [])
+
+  return (
+    <div className={cx(flex.flexColumnCenter, flex.flexGap24, flex.paddingHor32)}>
+      <h3>Fixed Positions</h3>
+      <div ref={fixedRef} className={cx(flex.flexRowCenter, flex.flexGap32)} />
+    </div>
+  )
 }
