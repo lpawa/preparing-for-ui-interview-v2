@@ -1,4 +1,4 @@
-import { AbstractComponent, type TComponentConfig } from '../18-abstract-component/component'
+import { AbstractComponent, type TComponentConfig } from '@course/utils'
 
 export class PortfolioVisualizer extends AbstractComponent<any> {
   constructor(config: TComponentConfig<any>) {

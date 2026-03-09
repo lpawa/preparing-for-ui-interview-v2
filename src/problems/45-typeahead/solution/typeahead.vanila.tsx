@@ -1,4 +1,4 @@
-import { AbstractComponent } from '../../18-abstract-component/component'
+import { AbstractComponent } from '@course/utils'
 import { Trie } from './trie'
 import styles from './typeahead.module.css'
 import type { TTypeaheadEntry } from './typeahead.react'

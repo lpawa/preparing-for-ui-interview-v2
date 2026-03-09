@@ -1,4 +1,4 @@
-import { AbstractComponent, type TComponentConfig } from '../../18-abstract-component/component'
+import { AbstractComponent, type TComponentConfig } from '@course/utils'
 import flex from '@course/styles'
 import cx from '@course/cx'
 import css from './tabs.module.css'

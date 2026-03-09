@@ -19,7 +19,9 @@ import type { Equal, Expect } from '@course/types'
 
 /* _____________ Your Code Here _____________ */
 
-// Your implementation here
+type MyPick<T extends {}, U extends keyof T> = {
+  [K in U]: T[K]
+}
 
 /* _____________ Test Cases _____________ */
 

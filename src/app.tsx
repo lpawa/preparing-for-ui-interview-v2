@@ -162,6 +162,11 @@ import deepCloneProblem from './problems/10-deep-clone/problem.md' with { type: 
 import stringifyProblem from './problems/13-stringify/problem.md' with { type: 'text' }
 import promiseProblem from './problems/14-promise/problem.md' with { type: 'text' }
 import treeSelectProblem from './problems/17-tree-select/problem.md' with { type: 'text' }
+import abstractComponentProblem from './problems/18-abstract-component/problem.md' with { type: 'text' }
+import {
+  AbstractComponentExample,
+  AbstractComponentStudentExample,
+} from './problems/18-abstract-component/component.example'
 
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism'
@@ -297,6 +302,16 @@ const SECTIONS = {
   components: {
     title: 'Components',
     items: {
+      abstractComponent: {
+        id: 'abstractComponent',
+        name: 'Abstract Component',
+        difficulty: 'medium',
+        variants: {
+          overview: { component: createProblemOverview(abstractComponentProblem) },
+          vanilla: { component: AbstractComponentExample },
+          studentVanilla: { component: AbstractComponentStudentExample },
+        },
+      },
       accordion: {
         id: 'accordion',
         name: 'Accordion',

@@ -1,4 +1,4 @@
-import { AbstractComponent, type TComponentConfig } from '../../18-abstract-component/component'
+import { AbstractComponent, type TComponentConfig } from '@course/utils'
 import { type IRedditComment } from './reddit-thread.react'
 import styles from './reddit-thread.module.css'
 import flex from '@course/styles'

@@ -1,4 +1,4 @@
-import { AbstractComponent } from '../../18-abstract-component/component'
+import { AbstractComponent } from '@course/utils'
 import { getEmptyPosition, getGameState, isWin, validate } from './square-game.utility'
 import css from './square-game.module.css'
 import flex from '@course/styles'

@@ -1,7 +1,5 @@
 // bun test src/problems/01-detect-type/test/detect-type.test.ts
 
-// TODO: Implement detectType
-
 export type TType =
   | 'null'
   | 'undefined'
@@ -25,7 +23,10 @@ export type TType =
   | string
 
 export const detectType = (value: any): TType => {
-  throw new Error('Not implemented')
+  if(value == null) {
+    return `${value}`;
+  }
+  return (Object.getPrototypeOf(value)?.constructor?.name ?? 'object').toLowerCase();
 }
 
 // --- Examples ---

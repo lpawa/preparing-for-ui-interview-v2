@@ -1,4 +1,4 @@
-import { AbstractComponent } from '../../18-abstract-component/component'
+import { AbstractComponent } from '@course/utils'
 import css from './calculator.module.css'
 import flex from '@course/styles'
 import cx from '@course/cx'

@@ -1,4 +1,4 @@
-import { AbstractComponent, type TComponentConfig } from '../../18-abstract-component/component'
+import { AbstractComponent, type TComponentConfig } from '@course/utils'
 import styles from './accordion.module.css'
 
 import flex from '@course/styles'

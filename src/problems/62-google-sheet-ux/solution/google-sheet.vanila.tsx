@@ -1,4 +1,4 @@
-import { AbstractComponent, type TComponentConfig } from '../../18-abstract-component/component'
+import { AbstractComponent, type TComponentConfig } from '@course/utils'
 import css from './google-sheet.module.css'
 
 export type TGoogleSheetProps = {
