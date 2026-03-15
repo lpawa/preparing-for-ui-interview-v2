@@ -179,3 +179,31 @@ export class TableEngine {
     throw new Error('TODO: Combine affectedFrom, topoSort, and evalCell into recompute pipeline!')
   }
 }
+
+// ── Uncomment below to test your implementation ─────────────────────
+// const engine = new TableEngine()
+//
+// // Set up a chain: A1=10, B1==A1*2 (20), C1==B1+5 (25)
+// engine.setRaw('A1', '10')
+// engine.setRaw('B1', '=A1*2')
+// engine.setRaw('C1', '=B1+5')
+// console.log('A1:', engine.getValue('A1'))  // "10"
+// console.log('B1:', engine.getValue('B1'))  // "20"
+// console.log('C1:', engine.getValue('C1'))  // "25"
+//
+// // Change A1 — B1 and C1 should recompute automatically
+// const { changed } = engine.setRaw('A1', '50')
+// console.log('changed:', changed)            // ["A1", "B1", "C1"] (or similar order)
+// console.log('A1:', engine.getValue('A1'))   // "50"
+// console.log('B1:', engine.getValue('B1'))   // "100"
+// console.log('C1:', engine.getValue('C1'))   // "105"
+//
+// // Circular reference — should mark both as #CYCLE!
+// engine.setRaw('D1', '=E1+1')
+// engine.setRaw('E1', '=D1+1')
+// console.log('D1:', engine.getValue('D1'))   // "#CYCLE!"
+// console.log('E1:', engine.getValue('E1'))   // "#CYCLE!"
+//
+// // Division by zero — should show #ERROR
+// engine.setRaw('F1', '=1/0')
+// console.log('F1:', engine.getValue('F1'))   // "#ERROR"

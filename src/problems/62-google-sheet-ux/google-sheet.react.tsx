@@ -1,5 +1,5 @@
 import {type CellId, TableEngine} from "../61-google-sheet-recompute/solution/table-engine.ts";
-import css from "./solution/google-sheet.module.css";
+import css from "./google-sheet.module.css";
 import cx from "@course/cx";
 
 export const COLS = [
@@ -52,6 +52,56 @@ const MAX_ROWS = 50
 const TABLE_COLUMNS = [EMPTY, ...COLS]
 
 const engine = new TableEngine()
+
+// ── Prepopulated data: Q1 Sales Report ──────────────────────────────
+// Row 1: Table headers
+engine.setRaw('A1', 'Product')
+engine.setRaw('B1', 'Q1 Sales')
+engine.setRaw('C1', 'Q2 Sales')
+engine.setRaw('D1', 'Total')
+engine.setRaw('E1', 'Margin %')
+engine.setRaw('F1', 'Status')
+
+// Rows 2-5: Product data with formulas
+engine.setRaw('A2', 'Widgets')
+engine.setRaw('B2', '1200')
+engine.setRaw('C2', '1450')
+engine.setRaw('D2', '=B2+C2')        // Total = 2650
+engine.setRaw('E2', '0.35')
+engine.setRaw('F2', 'Active')
+
+engine.setRaw('A3', 'Gadgets')
+engine.setRaw('B3', '800')
+engine.setRaw('C3', '950')
+engine.setRaw('D3', '=B3+C3')        // Total = 1750
+engine.setRaw('E3', '0.42')
+engine.setRaw('F3', 'Active')
+
+engine.setRaw('A4', 'Gizmos')
+engine.setRaw('B4', '2100')
+engine.setRaw('C4', '1800')
+engine.setRaw('D4', '=B4+C4')        // Total = 3900
+engine.setRaw('E4', '0.28')
+engine.setRaw('F4', 'Review')
+
+engine.setRaw('A5', 'Doohickeys')
+engine.setRaw('B5', '450')
+engine.setRaw('C5', '0')
+engine.setRaw('D5', '=B5+C5')        // Total = 450
+engine.setRaw('E5', '0.15')
+engine.setRaw('F5', 'Discontinued')
+
+// Row 6: Summary row with aggregation formulas
+engine.setRaw('A6', 'TOTAL')
+engine.setRaw('B6', '=B2+B3+B4+B5')  // Sum of Q1 Sales = 4550
+engine.setRaw('C6', '=C2+C3+C4+C5')  // Sum of Q2 Sales = 4200
+engine.setRaw('D6', '=D2+D3+D4+D5')  // Grand total = 8750
+
+// Row 8: Edge cases & error demonstrations
+engine.setRaw('A8', 'Edge Cases:')
+engine.setRaw('B8', '=1/0')           // Division by zero error
+engine.setRaw('C8', '=A9+1')          // Circular reference (A9 → C8 → A9)
+engine.setRaw('A9', '=C8+1')          // Circular reference partner
 
 type TCellProps = {
     column: string | symbol

@@ -124,3 +124,30 @@ export class TableEngine {
     return changed
   }
 }
+
+// ── Uncomment below to test your implementation ─────────────────────
+// const engine = new TableEngine()
+//
+// // Build a dependency chain: A1 → B1 → C1
+// engine.setRaw('A1', '10')
+// engine.setRaw('B1', '=A1*2')
+// engine.setRaw('C1', '=B1+5')
+//
+// // Test _affectedFrom — changing A1 should affect A1, B1, C1
+// console.log('affected from A1:', engine._affectedFrom('A1'))  // Set { "A1", "B1", "C1" }
+// console.log('affected from B1:', engine._affectedFrom('B1'))  // Set { "B1", "C1" }
+// console.log('affected from C1:', engine._affectedFrom('C1'))  // Set { "C1" }
+//
+// // Test _topoSort — should produce valid evaluation order
+// const affected = engine._affectedFrom('A1')
+// const { order, cyclic } = engine._topoSort(affected)
+// console.log('topo order:', order)   // ["A1", "B1", "C1"] (deps before dependents)
+// console.log('cyclic:', cyclic)      // Set {} (no cycles)
+//
+// // Circular reference — should detect cycle
+// engine.setRaw('D1', '=E1+1')
+// engine.setRaw('E1', '=D1+1')
+// const circAffected = engine._affectedFrom('D1')
+// const circResult = engine._topoSort(circAffected)
+// console.log('circular order:', circResult.order)   // [] or partial
+// console.log('circular cyclic:', circResult.cyclic) // Set { "D1", "E1" }

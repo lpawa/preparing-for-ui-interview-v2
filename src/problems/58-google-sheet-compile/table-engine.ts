@@ -80,3 +80,30 @@ export class TableEngine {
     return this.#compiled.get(id)
   }
 }
+
+// ── Uncomment below to test your implementation ─────────────────────
+// const engine = new TableEngine()
+//
+// // Basic value — no formula
+// engine.setRaw('A1', '10')
+// console.log('A1 raw:', engine.getRaw('A1'))       // "10"
+// console.log('A1 value:', engine.getValue('A1'))    // "10" (no eval yet)
+// console.log('A1 compiled:', engine._getCompiled('A1'))  // null (plain text)
+//
+// // Formula — should compile to RPN and track deps
+// engine.setRaw('B1', '20')
+// engine.setRaw('C1', '=A1+B1')
+// console.log('C1 compiled:', engine._getCompiled('C1'))  // { rpn: [...] }
+// console.log('C1 deps:', engine.getDeps('C1'))            // Set { "A1", "B1" }
+// console.log('A1 revDeps:', engine.getRevDeps('A1'))      // Set { "C1" }
+// console.log('B1 revDeps:', engine.getRevDeps('B1'))      // Set { "C1" }
+//
+// // Error — invalid formula
+// engine.setRaw('D1', '=A1+')
+// console.log('D1 compiled:', engine._getCompiled('D1'))  // { error: "..." }
+// console.log('D1 deps:', engine.getDeps('D1'))            // Set {} (no deps on error)
+//
+// // Dependency update — change C1 formula, old deps should be cleaned up
+// engine.setRaw('C1', '=A1*2')
+// console.log('C1 deps after update:', engine.getDeps('C1'))    // Set { "A1" }
+// console.log('B1 revDeps after update:', engine.getRevDeps('B1'))  // Set {} (removed)

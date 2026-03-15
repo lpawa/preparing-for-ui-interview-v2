@@ -167,3 +167,31 @@ export class TableEngine {
     return { order, cyclic }
   }
 }
+
+// ── Uncomment below to test your implementation ─────────────────────
+// const engine = new TableEngine()
+//
+// // Basic values
+// engine.setRaw('A1', '10')
+// engine.setRaw('B1', '20')
+// console.log('A1 value:', engine.getValue('A1'))  // "10"
+//
+// // Formula evaluation — should compute the result
+// engine.setRaw('C1', '=A1+B1')
+// console.log('C1 value:', engine.getValue('C1'))  // "30" (if _evalCell works)
+//
+// // Chained formula — depends on another formula
+// engine.setRaw('D1', '=C1*2')
+// console.log('D1 value:', engine.getValue('D1'))  // "60"
+//
+// // Division by zero — should return #ERROR
+// engine.setRaw('E1', '=1/0')
+// console.log('E1 value:', engine.getValue('E1'))  // "#ERROR"
+//
+// // Plain text — no formula, returned as-is
+// engine.setRaw('F1', 'hello')
+// console.log('F1 value:', engine.getValue('F1'))  // "hello"
+//
+// // Invalid formula — should return #ERROR
+// engine.setRaw('G1', '=A1+')
+// console.log('G1 value:', engine.getValue('G1'))  // "#ERROR"
