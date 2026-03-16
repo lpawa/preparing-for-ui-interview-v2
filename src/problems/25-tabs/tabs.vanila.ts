@@ -39,18 +39,30 @@ export class Tabs extends AbstractComponent<TTabsProps> {
 
   /**
    * Step 2: Implement toHTML
-   * - Render a <nav> with a <ul role="tablist"> containing tab buttons (use #getTabs helper)
-   * - Each <li> should have role="presentation"
-   * - Each <button> should have: role="tab", id="tab-{name}", aria-controls="tab-panel",
-   *   aria-selected="false"
-   * - If no external target, render a <section role="tabpanel" id="tab-panel" aria-labelledby="tab-{defaultTab}">
+   * - Render a <nav> with a <ul> containing tab buttons (use getTab helper)
+   * - If no external target, render a <section> for the content panel
    * - Use cx() and flex utilities for layout (flexRowStart, flexGap16)
+   *
+   * ARIA attributes for toHTML:
+   * - <ul>: role="tablist" — identifies the tab control container
+   * - <li>: role="presentation" — removes list item semantics
+   * - <section>: role="tabpanel" — identifies the content area as a tab panel
+   * - <section>: id="tab-panel" — referenced by aria-controls on each tab button
+   * - <section>: aria-labelledby="tab-{defaultTab}" — links panel to the active tab
    */
   toHTML(): string {
     // TODO: implement
     return ``
   }
 
+  /**
+   * ARIA attributes for getTab (<button>):
+   * - role="tab" — identifies the button as a tab control
+   * - id="tab-{name}" — unique id linked by aria-labelledby on the panel
+   * - aria-controls="tab-panel" — points to the content panel's id
+   * - aria-selected="false" — indicates whether this tab is active
+   * - data-tab="{name}" — used for click handling (not ARIA)
+   */
   getTab({ name }: TTabProps) {
     return ``
   }
@@ -84,34 +96,3 @@ export class Tabs extends AbstractComponent<TTabsProps> {
   }
 }
 
-/**
- * Step 6: Accessibility (a11y)
- * The following ARIA attributes are used in this component:
- *
- * Container:
- * - role="tablist" (on <ul>) — identifies the element as a container for tab controls,
- *   telling assistive technologies this is a set of tabs, not a regular list
- *
- * Tab items:
- * - role="presentation" (on <li>) — removes the list item semantics so screen readers
- *   don't announce "list item 1 of 3"; the meaningful role is on the <button> inside
- *
- * Tab buttons:
- * - role="tab" (on <button>) — identifies each button as a tab control, so screen readers
- *   announce it as "tab" rather than just "button"
- * - id="tab-{name}" — unique identifier used by aria-labelledby on the panel to create
- *   a programmatic link between the tab and its content
- * - aria-controls="tab-panel" — points to the id of the content panel this tab controls,
- *   allowing assistive technologies to navigate directly from tab to panel
- * - aria-selected="true|false" — indicates which tab is currently active; screen readers
- *   announce "selected" for the active tab so users know which tab they're on
- * - data-tab="{name}" — not an ARIA attribute, but used for click handling to identify
- *   which tab was clicked
- *
- * Content panel:
- * - role="tabpanel" (on <section>) — identifies the content area as a tab panel,
- *   so screen readers announce it as "tab panel" when the user navigates to it
- * - id="tab-panel" — unique identifier referenced by aria-controls on each tab button
- * - aria-labelledby="tab-{activeTab}" — links the panel to the currently active tab button,
- *   so screen readers announce the panel's label as the active tab's name (e.g., "Tab 1 tab panel")
- */
