@@ -1,6 +1,8 @@
 # Prepare for UI Interview V2
 
-This is a **Frontend Masters - Prepare for UI Interview V2** supporting repo. Here you will find problems that we solve together on the course along with additional materials and reference solutions for DOM API Based / React based challenges.
+This is repo is for the [Interviewing for Frontend Engineers, v2 course on Frontend Masters](https://frontendmasters.com/courses/interviewing-frontend-v2/). 
+
+Here you will find problems that we solve together on the course along with additional materials and reference solutions for DOM API Based / React based challenges.
 
 ## 🎓 Course Structure
 
